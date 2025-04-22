@@ -21,6 +21,12 @@ public class OrderService {
     private final CartItemRepository cartRepo;
     private final UserRepository userRepo;
 
+    public OrderService(OrderRepository orderRepo, CartItemRepository cartRepo, UserRepository userRepo) {
+        this.orderRepo = orderRepo;
+        this.cartRepo = cartRepo;
+        this.userRepo = userRepo;
+    }
+
     public Order placeOrder(String username) {
         User user = userRepo.findByUsername(username).orElseThrow();
         List<CartItem> cartItems = cartRepo.findByUser(user);

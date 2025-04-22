@@ -25,6 +25,13 @@ public class AuthController {
     private final UserRepository userRepo;
     private final PasswordEncoder passwordEncoder;
 
+    public AuthController(AuthenticationManager authManager, JwtService jwtService, UserRepository userRepo, PasswordEncoder passwordEncoder) {
+        this.authManager = authManager;
+        this.jwtService = jwtService;
+        this.userRepo = userRepo;
+        this.passwordEncoder = passwordEncoder;
+    }
+
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
         authManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));

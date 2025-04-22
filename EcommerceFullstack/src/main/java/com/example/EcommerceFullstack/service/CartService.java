@@ -19,6 +19,12 @@ public class CartService {
     private final ProductRepository productRepo;
     private final UserRepository userRepo;
 
+    public CartService(CartItemRepository cartRepo, ProductRepository productRepo, UserRepository userRepo) {
+        this.cartRepo = cartRepo;
+        this.productRepo = productRepo;
+        this.userRepo = userRepo;
+    }
+
     public List<CartItem> getUserCart(String username) {
         User user = userRepo.findByUsername(username).orElseThrow();
         return cartRepo.findByUser(user);

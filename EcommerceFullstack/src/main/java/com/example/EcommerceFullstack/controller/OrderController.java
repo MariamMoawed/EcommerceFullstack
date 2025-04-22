@@ -20,6 +20,10 @@ import java.util.List;
 public class OrderController {
     private final OrderService orderService;
 
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
+    }
+
     @PostMapping("/checkout")
     public ResponseEntity<ResponseWrapper<Order>> checkout(Authentication auth) {
         // Cast auth.getPrincipal() to UserDetails to access the username

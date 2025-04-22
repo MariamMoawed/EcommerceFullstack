@@ -20,6 +20,11 @@ public class SecurityConfig {
     private final JwtAuthFilter jwtFilter;    // Jwt filter for authentication
     private final AuthenticationProvider authProvider;  // Custom AuthenticationProvider
 
+    public SecurityConfig(JwtAuthFilter jwtFilter, AuthenticationProvider authProvider) {
+        this.jwtFilter = jwtFilter;
+        this.authProvider = authProvider;
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
