@@ -1,8 +1,8 @@
 package com.example.EcommerceFullstack.utility;
 
-import java.util.SequencedCollection;
+import java.util.List; // Replace SequencedCollection with List
 
-public class ResponseWrapper<L extends SequencedCollection<E>> {
+public class ResponseWrapper<T> {
     private boolean success;
     private String message;
     private T data;
@@ -37,3 +37,5 @@ public class ResponseWrapper<L extends SequencedCollection<E>> {
         this.data = data;
     }
 }
+
+

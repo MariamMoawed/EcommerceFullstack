@@ -2,6 +2,7 @@ package com.example.EcommerceFullstack.controller;
 
 import com.example.EcommerceFullstack.entity.Product;
 import com.example.EcommerceFullstack.repository.CategoryRepository;
+import com.example.EcommerceFullstack.service.ProductService;
 import com.example.EcommerceFullstack.utility.ResponseWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;

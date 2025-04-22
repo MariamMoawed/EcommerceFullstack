@@ -2,6 +2,7 @@ package com.example.EcommerceFullstack.controller;
 
 import com.example.EcommerceFullstack.dto.AuthRequest;
 import com.example.EcommerceFullstack.dto.AuthResponse;
+import com.example.EcommerceFullstack.entity.Role;
 import com.example.EcommerceFullstack.entity.User;
 import com.example.EcommerceFullstack.repository.UserRepository;
 import com.example.EcommerceFullstack.service.JwtService;

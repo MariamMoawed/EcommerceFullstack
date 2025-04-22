@@ -10,6 +10,10 @@ public class ProductDTO {
     private String imageUrl;
     private String categoryName;
 
+    public ProductDTO() {
+
+    }
+
     public static ProductDTO from(Product p) {
         ProductDTO dto = new ProductDTO();
         dto.setId(p.getId());
