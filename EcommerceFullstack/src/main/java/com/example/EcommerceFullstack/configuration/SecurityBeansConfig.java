@@ -19,10 +19,10 @@ public class SecurityBeansConfig {
         this.userDetailsService = userDetailsService;
     }
 
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
-        return new CustomAuthenticationProvider(userDetailsService, passwordEncoder());
-    }
+  //  @Bean
+  //  public AuthenticationProvider authenticationProvider() {
+  //      return new CustomAuthenticationProvider(userDetailsService, passwordEncoder());
+  //  }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
