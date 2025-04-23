@@ -32,6 +32,7 @@ public class AuthController {
         this.passwordEncoder = passwordEncoder;
     }
 
+
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
         authManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));

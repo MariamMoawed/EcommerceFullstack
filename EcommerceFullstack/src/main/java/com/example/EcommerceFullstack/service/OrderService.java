@@ -27,6 +27,7 @@ public class OrderService {
         this.userRepo = userRepo;
     }
 
+
     public Order placeOrder(String username) {
         User user = userRepo.findByUsername(username).orElseThrow();
         List<CartItem> cartItems = cartRepo.findByUser(user);

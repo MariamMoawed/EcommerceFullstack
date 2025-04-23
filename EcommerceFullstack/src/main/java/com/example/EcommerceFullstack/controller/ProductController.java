@@ -28,6 +28,7 @@ public class ProductController {
         this.categoryRepository = categoryRepository;
     }
 
+
     @GetMapping
     public ResponseEntity<ResponseWrapper<List<Product>>> all() {
         return ResponseEntity.ok(new ResponseWrapper<>(true, "All products", productService.getAll()));

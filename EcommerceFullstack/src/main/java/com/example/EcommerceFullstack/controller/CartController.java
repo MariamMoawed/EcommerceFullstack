@@ -21,6 +21,7 @@ public class CartController {
         this.cartService = cartService;
     }
 
+
     @GetMapping
     public ResponseEntity<ResponseWrapper<List<CartItem>>> getCart(Authentication auth) {
         // Cast auth.getPrincipal() to UserDetails to access the username

@@ -1,7 +1,5 @@
 package com.example.EcommerceFullstack.utility;
 
-import java.util.List; // Replace SequencedCollection with List
-
 public class ResponseWrapper<T> {
     private boolean success;
     private String message;

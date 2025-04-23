@@ -25,6 +25,7 @@ public class CartService {
         this.userRepo = userRepo;
     }
 
+
     public List<CartItem> getUserCart(String username) {
         User user = userRepo.findByUsername(username).orElseThrow();
         return cartRepo.findByUser(user);
