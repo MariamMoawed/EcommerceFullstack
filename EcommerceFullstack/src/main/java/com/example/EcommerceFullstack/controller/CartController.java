@@ -17,10 +17,6 @@ import java.util.List;
 public class CartController {
     private final CartService cartService;
 
-    public CartController(CartService cartService) {
-        this.cartService = cartService;
-    }
-
 
     @GetMapping
     public ResponseEntity<ResponseWrapper<List<CartItem>>> getCart(Authentication auth) {

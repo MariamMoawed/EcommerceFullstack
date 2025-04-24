@@ -23,11 +23,6 @@ public class ProductController {
     private final ProductService productService;
     private final CategoryRepository categoryRepository;
 
-    public ProductController(ProductService productService, CategoryRepository categoryRepository) {
-        this.productService = productService;
-        this.categoryRepository = categoryRepository;
-    }
-
 
     @GetMapping
     public ResponseEntity<ResponseWrapper<List<Product>>> all() {

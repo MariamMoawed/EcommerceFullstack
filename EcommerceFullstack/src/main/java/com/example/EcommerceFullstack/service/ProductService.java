@@ -12,10 +12,6 @@ import java.util.List;
 public class ProductService {
     private final ProductRepository productRepo;
 
-    public ProductService(ProductRepository productRepo) {
-        this.productRepo = productRepo;
-    }
-
 
     public List<Product> getAll() {
         return productRepo.findAll();
