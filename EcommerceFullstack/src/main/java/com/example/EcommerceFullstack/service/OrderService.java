@@ -17,6 +17,12 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class OrderService {
+    public OrderService(OrderRepository orderRepo, CartItemRepository cartRepo, UserRepository userRepo) {
+        this.orderRepo = orderRepo;
+        this.cartRepo = cartRepo;
+        this.userRepo = userRepo;
+    }
+
     private final OrderRepository orderRepo;
     private final CartItemRepository cartRepo;
     private final UserRepository userRepo;

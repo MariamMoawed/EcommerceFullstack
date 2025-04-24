@@ -20,6 +20,11 @@ import java.util.List;
 @RequestMapping("/api/products")
 @RequiredArgsConstructor
 public class ProductController {
+    public ProductController(ProductService productService, CategoryRepository categoryRepository) {
+        this.productService = productService;
+        this.categoryRepository = categoryRepository;
+    }
+
     private final ProductService productService;
     private final CategoryRepository categoryRepository;
 

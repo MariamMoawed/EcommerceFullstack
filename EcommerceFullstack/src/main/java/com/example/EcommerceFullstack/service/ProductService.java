@@ -10,6 +10,10 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ProductService {
+    public ProductService(ProductRepository productRepo) {
+        this.productRepo = productRepo;
+    }
+
     private final ProductRepository productRepo;
 
 

@@ -15,6 +15,12 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class CartService {
+    public CartService(CartItemRepository cartRepo, ProductRepository productRepo, UserRepository userRepo) {
+        this.cartRepo = cartRepo;
+        this.productRepo = productRepo;
+        this.userRepo = userRepo;
+    }
+
     private final CartItemRepository cartRepo;
     private final ProductRepository productRepo;
     private final UserRepository userRepo;

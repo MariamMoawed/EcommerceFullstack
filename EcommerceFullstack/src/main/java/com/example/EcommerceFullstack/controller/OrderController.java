@@ -18,6 +18,10 @@ import java.util.List;
 @RequestMapping("/api/orders")
 @RequiredArgsConstructor
 public class OrderController {
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
+    }
+
     private final OrderService orderService;
 
 
