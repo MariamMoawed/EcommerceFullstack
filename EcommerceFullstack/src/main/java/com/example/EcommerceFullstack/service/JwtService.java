@@ -1,43 +1,71 @@
 package com.example.EcommerceFullstack.service;
 
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.security.Key;
+import java.util.Base64;
 import java.util.Date;
 
 @Service
 public class JwtService {
 
     @Value("${jwt.secret}")
-    private String SECRET;
+    private String secretKeyString; // Loaded from application.properties
 
-    public String extractUsername(String token) {
-        return extractClaims(token).getSubject();
+    private Key key; // will be initialized lazily
+
+    // Token validity (e.g., 1 hour)
+    private static final long EXPIRATION_TIME = 3600000;
+
+    private Key getSigningKey() {
+        if (key == null) {
+            synchronized (this) {
+                if (key == null) {
+                    byte[] decodedKey = Base64.getDecoder().decode(secretKeyString);
+                    this.key = Keys.hmacShaKeyFor(decodedKey);
+                }
+            }
+        }
+        return key;
     }
 
-    public boolean isTokenValid(String token, UserDetails user) {
-        return extractUsername(token).equals(user.getUsername()) && !isExpired(token);
-    }
-
-    public String generateToken(UserDetails user) {
+    public String generateToken(String username) {
         return Jwts.builder()
-                .setSubject(user.getUsername())
+                .setSubject(username)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 3600_000))
-                .signWith(SignatureAlgorithm.HS256, SECRET)
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    private boolean isExpired(String token) {
-        return extractClaims(token).getExpiration().before(new Date());
+    public String extractUsername(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
     }
 
-    private Claims extractClaims(String token) {
-        return Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody();
+    public boolean isTokenValid(String token, String username) {
+        String extractedUsername = extractUsername(token);
+        return extractedUsername.equals(username) && !isTokenExpired(token);
+    }
+
+    private boolean isTokenExpired(String token) {
+        Date expiration = Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getExpiration();
+        return expiration.before(new Date());
     }
 }
+
+
 
