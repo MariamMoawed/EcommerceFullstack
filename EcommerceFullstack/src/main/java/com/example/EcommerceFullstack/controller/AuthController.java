@@ -37,7 +37,7 @@ public class AuthController {
     public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
         authManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
         User user = userRepo.findByUsername(request.getUsername()).orElseThrow();
-        String token = jwtService.generateToken(user);
+        String token = jwtService.generateToken(String.valueOf(user));
         return ResponseEntity.ok(new AuthResponse(token));
     }
 
@@ -48,6 +48,6 @@ public class AuthController {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(Role.USER);
         userRepo.save(user);
-        return ResponseEntity.ok(new AuthResponse(jwtService.generateToken(user)));
+        return ResponseEntity.ok(new AuthResponse(jwtService.generateToken(String.valueOf(user))));
     }
 }
